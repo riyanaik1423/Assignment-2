@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Manipulation & jQuery Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #myDiv {
+            color: blue;
+            position: relative;
+            top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .myClass {
+            color: green;
+        }
+
+        #myImage {
+            width: 200px;
+            height: auto;
+        }
+
+        #container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 id="title">Welcome to the DOM Manipulation Demo</h2>
+
+    <div id="myDiv">This is a sample text in a div.</div>
+
+    <p class="myClass">Paragraph 1</p>
+    <p class="myClass">Paragraph 2</p>
+
+    <img id="myImage" src="https://via.placeholder.com/200" alt="Placeholder">
+
+    <br><br>
+
+    <button onclick="changeText()">Change Text using innerHTML</button>
+    <button onclick="changeStyle()">Change Color & Position</button>
+    <button onclick="changeImage()">Change Image</button>
+    <button onclick="addTextNode()">Add Text Node</button>
+    <button onclick="deleteNode()">Delete a Node</button>
+
+    <div id="container"></div>
+
+    <br><br>
+
+    <h3>jQuery Operations</h3>
+
+    <form id="myForm">
+        Name: <input type="text" id="name"><br><br>
+        Email: <input type="email" id="email"><br><br>
+        <button type="button" id="formBtn">Get Form Data</button>
+    </form>
+
+    <br>
+
+    <button id="changeBtnText">Change Button Text (jQuery)</button>
+    <button id="setBg">Set Background Image (jQuery)</button>
+    <button id="addAttr">Add Attribute to Image (jQuery)</button>
+
+    <div id="formOutput"></div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function changeText() {
+            document.getElementById("myDiv").innerHTML = "Text changed using innerHTML!";
+        }
+
+        function changeStyle() {
+            let elem = document.getElementById("myDiv");
+            elem.style.color = "red";
+            elem.style.position = "relative";
+            elem.style.top = "30px";
+        }
+
+        function changeImage() {
+            document.getElementById("myImage").src = "https://via.placeholder.com/200/0000FF/FFFFFF?text=New+Image";
+        }
+
+        function addTextNode() {
+            let newText = document.createTextNode("This is a new text node.");
+            document.getElementById("container").appendChild(newText);
+        }
+
+        function deleteNode() {
+            let paras = document.getElementsByTagName("p");
+            if (paras.length > 0) {
+                paras[0].parentNode.removeChild(paras[0]);
+            }
+        }
+
+        // jQuery Operations
+        $(document).ready(function() {
+            $("#changeBtnText").click(function() {
+                $(this).text("Text Changed!");
+            });
+
+            $("#setBg").click(function() {
+                $("body").css("background-image", "url('https://via.placeholder.com/800x600')");
+                $("body").css("background-size", "cover");
+            });
+
+            $("#formBtn").click(function() {
+                let name = $("#name").val();
+                let email = $("#email").val();
+                $("#formOutput").html("Name: " + name + "<br>Email: " + email);
+            });
+
+            $("#addAttr").click(function() {
+                $("#myImage").attr("alt", "New Image Alt Text");
+                alert("Alt attribute added to image!");
+            });
+        });
+    </script>
+
+</body>
+</html>
